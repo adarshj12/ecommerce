@@ -1,0 +1,82 @@
+<%- include('../partials/admin/header');-%>
+    <section class="content-main">
+        <h2 class="content-title">Add New Product</h2>
+        <div class="row">
+            <div class="card ">
+                <form action="/admin/addProduct" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>1. General info</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                    <label class="form-label">Product title</label>
+                                    <input type="text" name="name" placeholder="Type here" class="form-control">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Description</label>
+                                    <textarea placeholder="Type here" name="description" class="form-control" rows="4"></textarea>
+                                </div>
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr class="mb-4 mt-0">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>2. Pricing</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                    <label class="form-label">Cost in INR</label>
+                                    <input type="number" name="price" placeholder="₹00.0" class="form-control">
+                                </div>
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>3. Stock</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                    <label class="form-label">Items in Inventory</label>
+                                    <input type="number" name="stock" placeholder="0" class="form-control">
+                                </div>
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr class="mb-4 mt-0">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>4. Category</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                    <% categories.forEach((elem, index) => { %>
+                                        <label class="mb-2 form-check form-check-inline" style="width: 45%;">
+                                            <input id="payment-method-3" name="category" class="input-radio" type="radio"
+                                            value="<%=elem%>" name="payment_method">
+                                        <label for="payment-method-3"><%=elem%> </label>
+                                        </label>
+                                    <% }) %>
+                                </div>
+                            </div> <!-- col.// -->
+                        </div> <!-- row.// -->
+                        <hr class="mb-4 mt-0">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>5. Photos</h6>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="mb-4">
+                                    <label class="form-label">Images</label>
+                                    <input class="form-control" name="image" type="file" multiple>
+                                </div>
+                            </div> <!-- col.// -->
+                        </div> <!-- .row end// -->
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </section> <!-- content-main end// -->
+    <%- include('../partials/admin/footer');-%>

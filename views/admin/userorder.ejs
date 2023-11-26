@@ -1,0 +1,173 @@
+<%- include('../partials/admin/header');-%>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Order detail</h2>
+                <p>Details for Order ID: <%=order._id%>
+                </p>
+            </div>
+        </div>
+        <div class="card">
+            <header class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
+                        <span>
+                            <i class="material-icons md-calendar_today"></i> <b>
+                                <%=new Date(order.orderDate).toDateString().slice(4,15)%>,<%=new
+                                        Date(order.orderDate).getHours()%>:<%=new Date(order.orderDate).getMinutes()%>
+                            </b>
+                        </span> <br>
+                        <small class="text-muted">Order ID: <%=order._id%></small>
+                    </div>
+                    <div class="col-lg-6 col-md-6 ms-auto text-md-end">
+                        <a class="btn btn-primary" href="#">Save</a>
+                        <a class="btn btn-secondary print ms-2" href="#"><i
+                                class="icon material-icons md-print"></i></a>
+                    </div>
+                </div>
+            </header> <!-- card-header end// -->
+            <div class="card-body">
+                <div class="row mb-50 mt-20 order-info-wrap">
+                    <div class="col-md-4">
+                        <article class="icontext align-items-start">
+                            <span class="icon icon-sm rounded-circle bg-primary-light">
+                                <i class="text-primary material-icons md-person"></i>
+                            </span>
+                            <div class="text">
+                                <h6 class="mb-1">Customer</h6>
+                                <p class="mb-1">
+                                    <%=order.user.name%> <br> +91<%=order.user.mobile%><br>
+                                            <%=order.user.email%>
+                            </div>
+                        </article>
+                    </div> <!-- col// -->
+                    <div class="col-md-4">
+                        <article class="icontext align-items-start">
+                            <span class="icon icon-sm rounded-circle bg-primary-light">
+                                <i class="text-primary material-icons md-local_shipping"></i>
+                            </span>
+                            <div class="text">
+                                <h6 class="mb-1">Order info</h6>
+                                <p class="mb-1">
+                                    Shipping: Bluedart express <br> Pay method: <%=order.paymentMode%>
+                                </p>
+                            </div>
+                        </article>
+                    </div> <!-- col// -->
+                    <div class="col-md-4">
+                        <article class="icontext align-items-start">
+                            <span class="icon icon-sm rounded-circle bg-primary-light">
+                                <i class="text-primary material-icons md-place"></i>
+                            </span>
+                            <div class="text">
+                                <h6 class="mb-1">Deliver to</h6>
+                                <p class="mb-1">
+                                    <%=order.deliveryAddress[0]%> <br>
+                                        <%=order.deliveryAddress[2]%><br> +91<%=order.deliveryAddress[1]%><br>
+                                                <%=order.deliveryAddress[3]%> , <%=order.deliveryAddress[4]%>,
+                                                        <%=order.deliveryAddress[5]%>
+                                </p>
+                            </div>
+                        </article>
+                    </div> <!-- col// -->
+                </div> <!-- row // -->
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Unit Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th class="text-end">Change Product Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for(let i=0;i<order.result.length;i++){%>
+                                        <tr>
+                                            <td>
+                                                <a class="itemside" href="#">
+                                                    <div class="left">
+                                                        <img src="<%=order.result[i].photos[0].image_url%>" width="40"
+                                                            height="40" class="img-xs" alt="Item">
+                                                    </div>
+                                                    <div class="info">
+                                                        <%=order.result[i].name%>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td> ₹<%=order.result[i].price%>
+                                            </td>
+                                            <td>
+                                                <%=order.products[i].quantity%>
+                                            </td>
+                                            <td>
+                                                <%=order.result[i].price * order.products[i].quantity%>
+                                            </td>
+                                            <td>
+                                                <%if(order.products[i].status!=='delivered'&&order.products[i].status!=='canceled'&&order.products[i].status!=='refunded'){%>
+                                                    <select
+                                                        onchange="changeProdStatus('<%=order._id%>','<%=order.products[i]._id%>',this.value)"
+                                                        class="form-select d-inline-block mb-lg-0 mb-15 mw-200 ">
+                                                        <option selected>
+                                                            <%=order.products[i].status%>
+                                                        </option>
+                                                        <%if(order.products[i].status!=='shipped'){%>
+                                                            <option value="shipped">shipped</option>
+                                                            <%}%>
+                                                                <option value="delivered">delivered</option>
+                                                    </select>
+                                                    <%}if(order.products[i].status==='canceled'&&(order.paymentMode==='razorpay'||order.paymentMode==='paypal')){%>
+                                                        <button onclick="refundUser('<%=order.user._id%>','<%=order.result[i].price * order.products[i].quantity%>','<%=order._id%>','<%=order.products[i]._id%>','<%=order.user.name%>','<%=order.user.email%>','<%=order.user.mobile%>')" class="btn btn-warning">refund</button>
+                                                        <%}if((order.products[i].status!=='placed')&&(order.products[i].status!=='shipped')){%>
+                                                            <h5>
+                                                                <%=order.products[i].status%>
+                                                            </h5>
+                                                            <%}%>
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                            <tr>
+                                                <td colspan="4">
+                                                    <article class="float-end">
+                                                        <dl class="dlist">
+                                                            <dt>Grand total:</dt>
+                                                            <dd> <b class="h5">₹<%=order.totalAmount%></b> </dd>
+                                                        </dl>
+                                                        <dl class="dlist">
+                                                            <dt class="text-muted">Status:</dt>
+                                                            <dd>
+                                                                <span
+                                                                    class="badge rounded-pill alert-success text-success">Payment
+                                                                    done</span>
+                                                            </dd>
+                                                        </dl>
+                                                    </article>
+                                                </td>
+                                            </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-4">
+                        <div class="box shadow-sm bg-light">
+                            <h6 class="mb-15">Payment info</h6>
+                            <p>
+                                <%if(order.paymentMode==='razorpay'){%>
+                                    <img src="/images/razorpay.jpeg" class="border" height="20"> <br>
+                                    Payment receipt :<%=order.paymentReceipt%><br>
+                                        <%}else if(order.paymentMode==='paypal' ){%>
+                                            <img src="/images/paypal.jpeg" class="border" height="20"><br>
+                                            Payment receipt:<%=order.paymentReceipt%> <br>
+                                                <%}%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/admin/footer');-%>

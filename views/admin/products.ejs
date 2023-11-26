@@ -1,0 +1,75 @@
+<%- include('../partials/admin/header');-%>
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Products</h2>
+        </div>
+            <a href="/admin/addProduct" class="btn btn-primary btn-sm rounded">Add Product</a>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th>Sl. No</th>
+                        <th>Picture</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Added Date</th>
+                        <th>Price</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%products.forEach((elem,index)=>{%>
+                    <tr>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=index+1%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <img style="width: 100px;height: 100px;" src="<%=elem.photos[0].image_url%>" alt="<%=elem.name%>">
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem.name%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem.category.name%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=new Date(elem.addedDate).toDateString().slice(4,15)%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem.price%></span>
+                        </td>
+                        <td class="col-lg-1 col-sm-2 col-4 col-date">
+                            <a href="/admin/editProduct?id=<%=elem._id%>" class="btn btn-sm font-sm btn-light rounded">
+                                <i class="material-icons md-edit"></i> 
+                            </a>
+                        </td>
+                        <td class="col-lg-1 col-sm-2 col-4 col-date">
+                            <button onclick="deleteProduct('<%=elem._id%>','<%=elem.name%>')" class="btn btn-sm font-sm btn-danger rounded">
+                                <i style="color: white;" class="material-icons md-delete_forever"></i> 
+                            </button>
+                        </td>
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination-area mt-30 mb-50">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-start">
+                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">16</a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</section> 
+<%- include('../partials/admin/footer');-%>

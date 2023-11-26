@@ -1,0 +1,58 @@
+<%- include('../../partials/user/header');-%>
+  <section>
+    <div class="card">
+      <div class="card-body">
+        <div class="row gx-5">
+          <aside class="col-lg-3 border-end">
+            <nav class="nav nav-pills flex-lg-column mb-4">
+              <a class="nav-link active" href="/account">Dashboard</a>
+              <a class="nav-link " href="/orders">My Orders</a>
+              <a class="nav-link" href="/address">Address</a>
+            </nav>
+          </aside>
+          <div class="col-lg-9 ">
+            <section class="mt-5">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="mb-0">Hello <%=user.name%>
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <p>
+                    From your account dashboard, you can manage your orders and delivery addresses
+                    <a href="/profile">Update Profile</a>
+                  </p>
+                </div>
+              </div><br><br><br>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Wallet Balance</h5>
+
+                  <p class="card-text"><strong>₹ <%=user.wallet%></strong></p>
+                </div>
+              </div><br>
+              <hr><br>
+             <%coupons?.forEach(elem=>{%>
+              <h3><b>Latest Coupons</b></h3>
+              <div class="row">
+
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Code</h5>
+
+                    <p class="card-text"><em><%=elem.name%></em></p>
+                    <p>Expires on -
+                    <p class="card-text" style="color: red;"><%=new Date(elem.expiry).toDateString().slice(4,15)%></p>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+             <%})%>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include('../../partials/user/footer');-%>

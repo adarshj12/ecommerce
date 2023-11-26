@@ -1,0 +1,78 @@
+<%- include('../partials/admin/header');-%>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">User List</h2>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sl. No</th>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((elem,index)=>{%>
+                            <tr>
+                                <td class="col-lg-2 col-sm-2 col-4 col-price">
+                                    <span>
+                                        <%=index+1%>
+                                    </span>
+                                </td>
+                                <td class="col-lg-2 col-sm-2 col-4 col-price">
+                                    <span>
+                                        <%=elem.name%>
+                                    </span>
+                                </td>
+                                <td class="col-lg-2 col-sm-2 col-4 col-price">
+                                    <span>
+                                        <%=elem.mobile%>
+                                    </span>
+                                </td>
+                                <td class="col-lg-1 col-sm-2 col-4 col-date">
+                                    <span>
+                                        <%=elem.email%>
+                                    </span>
+                                </td>
+                                <td class="col-lg-2 col-sm-2 col-4 col-status">
+                                    <span
+                                        class="badge rounded-pill <%= elem.isBlocked ? 'alert-danger' : 'alert-success' %>">
+                                        <%= elem.isBlocked ? 'Blocked' : 'Active' %>
+                                    </span>
+                                </td>
+                                <td class="col-lg-1 col-sm-2 col-4 col-date">
+                                    <label class="switch">
+                                        <input onchange="toggleUser('<%=elem._id%>')" type="checkbox" <%=elem.isBlocked
+                                            ? 'checked' : '' %>>
+                                        <span class="slider"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="pagination-area mt-30 mb-50">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-start">
+                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">16</a></li>
+                    <li class="page-item"><a class="page-link" href="#"><i
+                                class="material-icons md-chevron_right"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </section> 
+    <%- include('../partials/admin/footer');-%>

@@ -1,0 +1,47 @@
+<%- include('../partials/user/header');-%>
+<section>
+    <div class="login-register-area pb-100 ">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-12 offset-lg-2">
+            <div class="login-register-wrapper">
+              <div class="login-register-tab-list nav">
+                <a class="active" data-bs-toggle="tab" href="#lg1">
+                  <h4> Login </h4>
+                </a>
+              </div>
+              <div>
+                <% if (errorMessage) { %>
+                  <p class="error-message" style="color: red;font-size: medium;"><%= errorMessage %></p>
+                <% } %>
+              </div>
+              <div class="tab-content">
+                <div id="lg1" class="tab-pane active">
+                  <div class="login-form-container">
+                    <div class="login-register-form">
+                      <form action="/login" method="post">
+                        <input type="text" name="email" placeholder="Email">
+                        <input type="password" name="password" placeholder="Password">
+                        <div class="login-toggle-btn" style="display: flex; justify-content: space-between; align-items: center;">
+                          <a href="/register" style="margin-right: 1rem;">Register</a>
+                          <div class="forgot-otp-links" style="display: flex; flex-direction: column;">
+                            <!-- <a href="#" style="align-self: flex-end;">Forgot Password?</a> -->
+                            <a href="/otplogin" style="align-self: flex-end;">OTP Login</a>
+                          </div>
+                        </div>
+                        <div class="button-box btn-hover">
+                          <button type="submit">Login</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+    <%- include('../partials/user/footer');-%>

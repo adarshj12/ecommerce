@@ -1,0 +1,98 @@
+<%- include('../../partials/user/header');-%>
+    <section>
+        <div class="card">
+            <div class="card-body">
+                <div class="row gx-5">
+                    <aside class="col-lg-3 border-end">
+                        <nav class="nav nav-pills flex-lg-column mb-4">
+                            <a class="nav-link " aria-current="" href="account">Dashboard</a>
+                            <a class="nav-link " href="orders">My Orders</a>
+                            <a class="nav-link active" href="address">Address</a>
+                        </nav>
+                    </aside>
+                    <div class="col-lg-9">
+                        <section class="content-body p-xl-4">
+
+
+                            <div class="row">
+                                <%addresses.forEach(elem=>{%>
+                                    <div class="card" style="width: 18rem;margin-right: 20px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%=elem.customername%>
+                                            </h5>
+
+                                            <p class="card-text">
+                                                <%=elem.contactnumber%>
+                                            </p>
+                                            <p class="card-text">
+                                                <%=elem.city%> , <%=elem.state%>
+                                            </p>
+
+                                            <a href="/editaddress?id=<%=elem._id%>" class=" btn-small"
+                                                style="color:blue ;">Edit</a>
+                                            <a onclick="deleteAddress('<%=elem._id%>')"><i class="ti-trash"></i></a>
+                                        </div>
+
+                                    </div>
+                                    <%})%>
+                            </div>
+
+                            <div id="address-container">
+                                <div class="checkout-account mt-25">
+                                    <input class="checkout-toggle w-auto h-auto" type="checkbox" />
+                                    <label for="toggle-address">Add a new Shipping address</label>
+                                </div>
+
+                                <div class="different-address open-toggle mt-30px">
+                                    <form onsubmit="addAddress(event)">
+                                        <input type="text" name="userId" id="" value="<%=user%>" hidden>
+                                        <input type="text" name="action" id="" value="add" hidden>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="firstName">Customer Name</label>
+                                                <input type="text" class="form-control" id="Contactname"
+                                                    name="customername">
+                                                <span id="name-error" style="color: red;"></span>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="mobilenumber">Contact Number</label>
+                                                <input type="text" class="form-control" id="contactNumber"
+                                                    name="contactnumber">
+                                                <span id="mobile-error" style="color: red;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="customeremail">
+                                            <span id="email-error" style="color: red;"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="address">City</label>
+                                            <input type="text" class="form-control" id="city" name="city">
+                                            <span id="address-error" style="color: red;"></span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5 mb-3">
+                                                <label for="country">State</label>
+                                                <input type="text" class="form-control" id="state" name="state">
+                                                <span id="country-error" style="color: red;"></span>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="pin">Pin Code</label>
+                                                <input type="text" class="form-control" id="pincode" name="pincode">
+                                                <span id="pin-error" style="color: red;"></span>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <button class="btn btn-primary btn-sm" type="submit">Save address</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../../partials/user/footer');-%>

@@ -1,0 +1,95 @@
+<%- include('../partials/user/header');-%>
+<section>
+    <div class="shop-area pb-100">
+        <div class="container">
+            <div class="row flex-row-reverse">
+                <div class="col-12">
+                    <div class="shop-topbar-wrapper mb-40">
+                        <div class="shop-topbar-left">
+                            <div class="showing-item">
+                                <span>Showing 1–4 of <%= products?.length %> results</span>
+                            </div>
+                        </div>
+                        <div class="shop-topbar-right">
+                            <div class="shop-sorting-area">
+                                <select class="nice-select nice-select-style-1">
+                                    <option>Default Sorting</option>
+                                    <option>Sort by popularity</option>
+                                    <option>Sort by average rating</option>
+                                    <option>Sort by latest</option>
+                                </select>
+                            </div>
+                            <div class="shop-view-mode nav">
+                                <a href="#shop-1" data-bs-toggle="tab"><i class=" ti-layout-grid3 "></i> </a>
+                                <a class="active" href="#shop-2" data-bs-toggle="tab"><i class=" ti-view-list-alt "></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-bottom-area">
+                        <div class="tab-content jump">
+                            <div id="shop-1" class="tab-pane">
+                                <div class="row">
+                                </div>
+                                <div class="pagination-style-1">
+                                    <ul>
+                                        <li><a class="active" href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a class="next" href="#"><i class=" ti-angle-double-right "></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="shop-2" class="tab-pane active">
+                                <% products?.forEach(product => { %>
+                                    <div class="shop-list-wrap mb-30" data-aos="fade-up" data-aos-delay="200">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-5">
+                                                <div class="product-list-img">
+                                                    <a href="/product?id=<%= product._id %>">
+                                                        <img style="height: 300px;width: 300px;" src="<%= product.photos[0].image_url %>" alt="Product Style">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-7">
+                                                <div class="shop-list-content">
+                                                    <h3><a href="/product?id=<%= product._id %>"><%= product.name %></a></h3>
+                                                    <div class="product-price">
+                                                        <%if(discount>0){%>
+                                                        <span class="old-price">₹<%=Math.ceil(product.price*(1/(1-(discount)/100)))%></span>
+                                                        <%}%>
+                                                        <span class="new-price">₹<%= product.price %></span>
+                                                    </div>
+                                                    <!-- <div class="product-list-rating">
+                                                        <% for (let i = 0; i < 5; i++) { %>
+                                                            <i class="ti-star"></i>
+                                                        <% } %>
+                                                    </div> -->
+                                                    <p><%= product.description %></p>
+                                                    <!-- <div class="product-list-action">
+                                                        <button class="product-action-btn-3" title="Add to cart"><i class="pe-7s-cart"></i></button>
+                                                        <button class="product-action-btn-3" title="Wishlist"><i class="pe-7s-like"></i></button>
+                                                        <button class="product-action-btn-3" title="Compare"><i class="pe-7s-shuffle"></i></button>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                                
+                                <div class="pagination-style-1" data-aos="fade-up" data-aos-delay="200">
+                                    <ul>
+                                        <li><a class="active" href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a class="next" href="#"><i class=" ti-angle-double-right "></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include('../partials/user/footer');-%>

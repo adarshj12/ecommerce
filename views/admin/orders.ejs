@@ -1,0 +1,75 @@
+<%- include('../partials/admin/header');-%>
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Products</h2>
+        </div>
+        <di
+            <a href="#" class="btn btn-primary btn-sm rounded">Create new</a>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th>Sl. No</th>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Mobile</th>
+                        <th>Payment Mode</th>
+                        <th>Order Date</th>
+                        <th>Amount</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%orders.forEach((elem,index)=>{%>
+                    <tr>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=index+1%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem._id%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem.user.name%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem.user.mobile%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem.paymentMode%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=new Date(elem.orderDate).toDateString().slice(4,15)%></span>
+                        </td>
+                        <td class="col-lg-2 col-sm-2 col-4 col-price">
+                            <span><%=elem.totalAmount%></span>
+                        </td>
+                        <td class="col-lg-1 col-sm-2 col-4 col-date">
+                            <a href="/admin/order?id=<%=elem._id%>" class="btn btn-sm font-sm btn-light rounded">
+                                <i class="icon material-icons md-navigate_next"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination-area mt-30 mb-50">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-start">
+                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">16</a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</section> 
+<%- include('../partials/admin/footer');-%>

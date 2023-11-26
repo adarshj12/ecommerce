@@ -1,0 +1,109 @@
+<%- include('../partials/user/header');-%>
+    <section>
+        <div class="checkout-main-area pb-100 ">
+            <div class="container">
+                <div class="customer-zone mb-20" id="couponSection">
+                    <p class="cart-page-title">Have a coupon? <a class="checkout-click3" href="#">Click here to enter
+                            your code</a></p>
+                    <div class="checkout-login-info3">
+                        <form id="couponForm" onsubmit="checkoutCoupon(event)">
+                            <input type="text" name="coupon" placeholder="Coupon code">
+                            <input type="text" name="user" id="" value="<%=user._id%>" hidden>
+                            <input type="text" name="amount" id="" value="<%=total[0].totalAmount%>" hidden>
+                            <input type="text" name="couponAmount" id="couponAmountField" value="" hidden>
+                            <input type="submit" value="Apply Coupon">
+                        </form>
+                    </div>
+                </div>
+                <div id="responseMessage" style="display: none;"></div>
+                <form onsubmit="place_order(event)">
+                    <div class="checkout-wrap pt-30">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="billing-info-wrap">
+                                    <h3>Billing Address</h3>
+                                    <p class="cart-page-title">Adding new address? <a href="/address">Click here to
+                                        add one</a></p>
+                                    <%if(addresses.length==0){%>
+                                        <p class="cart-page-title">Didn't save address? <a href="/address">Click here to
+                                                add one</a></p>
+                                        <%}%>
+                                            <div class="address-list mb-3">
+                                                    <% addresses.forEach((elem, index) => { %>
+                                                        <div class="form-check mb-3 custome-radio choose-address">
+                                                            <input
+                                                                value="<%=elem.customername%>, <%=elem.contactnumber%>,<%=elem.customeremail%>, <%=elem.city%>, <%=elem.state%>, <%=elem.pincode%>"
+                                                                class="form-check-input deliveryAddress"
+                                                                style="padding-left:2px" type="radio" name="address"
+                                                                required>
+                                                            <label class="form-check-label"><em>
+                                                                <%=elem.customername%>, <%=elem.contactnumber%>,<%=elem.customeremail%>,
+                                                                <%=elem.city%>, <%=elem.state%>,
+                                                                <%=elem.pincode%>
+                                                            </em></label>
+                                                        </div>
+                                                    <% }) %>
+                                            </div>
+                                </div>
+                            </div>
+                            <input type="text" name="user" id="" value="<%=user._id%>" hidden>
+                            <div class="col-lg-5">
+                                <div class="your-order-area">
+                                    <h3>Your order</h3>
+                                    <div class="your-order-wrap gray-bg-4">
+                                        <div class="your-order-info-wrap">
+                                            <div class="your-order-info">
+                                                <ul>
+                                                    <li>Product <span>Total</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="your-order-middle">
+                                                <ul>
+                                                    <% products.forEach(elem=>{%>
+                                                        <li>
+                                                            <%=elem.product.name%> X <%=elem.products.quantity%> <span>₹
+                                                                        <%=elem.totalPrice%> </span>
+                                                        </li>
+                                                        <%})%>
+                                                </ul>
+                                            </div>
+                                            <div class="your-order-info order-total">
+                                                <ul>
+                                                    <li>Total <span id="checkout-amount">₹<%=total[0].totalAmount%> </span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="payment-method">
+                                            <div class="pay-top sin-payment">
+                                                <input id="payment_method_1" class="input-radio" type="radio"
+                                                    value="razorpay" checked="checked" name="payment_method">
+                                                <label for="payment_method_1"><img alt=""
+                                                    src="/images/razorpay.jpeg"></label>
+                                            </div>
+                                            <div class="pay-top sin-payment sin-payment-3">
+                                                <input id="payment-method-4" class="input-radio" type="radio"
+                                                    value="paypal" name="payment_method">
+                                                <label for="payment-method-4"><img alt=""
+                                                        src="/images/paypal.jpeg"></label>
+
+                                            </div>
+                                            <div class="pay-top sin-payment">
+                                                <input id="payment-method-3" class="input-radio" type="radio"
+                                                    value="cod" name="payment_method">
+                                                <label for="payment-method-3">Cash on delivery </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="Place-order btn-hover" style="text-align: center;">
+                                        <button style="width: 90%; max-width: 300px;" class="btn btn-success" type="submit">PLACE ORDER</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/user/footer');-%>

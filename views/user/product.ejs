@@ -1,0 +1,106 @@
+<%- include('../partials/user/header');-%>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-details-img-wrap product-details-vertical-wrap" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div class="product-details-small-img-wrap">
+                            <div class="swiper-container product-details-small-img-slider-1 pd-small-img-style">
+                                <div class="swiper-wrapper">
+                                    <% for (let i=0; i < product.photos.length; i++) { %>
+                                        <div class="swiper-slide">
+                                            <div class="product-details-small-img">
+                                                <img src="<%= product.photos[i].image_url %>" alt="Product Thumnail">
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+                            <div class="pd-prev pd-nav-style"> <i class="ti-angle-up"></i></div>
+                            <div class="pd-next pd-nav-style"> <i class="ti-angle-down"></i></div>
+                        </div>
+                        <div class="swiper-container product-details-big-img-slider-1 pd-big-img-style">
+                            <div class="swiper-wrapper">
+                                <% for (let i=0; i < product.photos.length; i++) { %>
+                                    <div class="swiper-slide">
+                                        <div class="easyzoom-style">
+                                            <div class="easyzoom easyzoom--overlay">
+                                                <a href="<%= product.photos[i].image_url %>">
+                                                    <img src="<%= product.photos[i].image_url %>" alt="">
+                                                </a>
+                                            </div>
+                                            <a class="easyzoom-pop-up img-popup"
+                                                href="<%= product.photos[i].image_url %>">
+                                                <i class="pe-7s-search"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-details-content" data-aos="fade-up" data-aos-delay="400">
+                        <h2>
+                            <%= product.name %>
+                        </h2>
+                        <div class="product-details-price">
+                            <%if(discount>0){%>
+                                <span class="old-price">₹<%=Math.ceil(product.price*(1/(1-(discount)/100)))%></span>
+                            <%}%>
+                            <span class="new-price">₹<%= product.price  %></span>
+                        </div>
+                        <!-- <div class="product-details-review">
+                        <div class="product-rating">
+                            <% for (let i = 0; i < 5; i++) { %>
+                            <i class="ti-star"></i>
+                            <% } %>
+                        </div>
+                        <span>( 1 Customer Review )</span>
+                    </div> -->
+
+                        <div class="product-details-action-wrap">
+                            <%if(status){%>
+                            
+                            <div class="single-product-cart btn-hover">
+                                <% if (user) { %>
+                                    <button class="btn btn-primary" onclick="addToCart('<%= product._id %>')" >Add to cart</button>
+                                    <% } else { %> 
+                                        <button class="btn btn-primary" onclick="loggedOut()" >Add to cart</button>
+                                        <% } %>
+                            </div>
+                            <%}else{%>
+                                <h4><em style="color: red;">Product Out Of Stock</em></h4>
+                                <%}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="description-review-area pb-85">
+            <div class="container">
+                <div class="description-review-topbar nav" data-aos="fade-up" data-aos-delay="200">
+                    <a class="active" data-bs-toggle="tab" href="#des-details1"> Description </a>
+                </div>
+                <div class="tab-content">
+                    <div id="des-details1" class="tab-pane active">
+                        <div class="product-description-content text-center">
+                            <p data-aos="fade-up" data-aos-delay="200">
+                                <%= product.description %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/user/footer');-%>
+
+        <script>
+            const loggedOut = () => {
+                location.href='/login'
+            }
+            
+        </script>

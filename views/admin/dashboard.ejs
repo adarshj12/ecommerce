@@ -1,0 +1,89 @@
+<%- include('../partials/admin/header');-%>
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Dashboard </h2>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-primary-light"><i class="text-primary material-icons md-monetization_on"></i></span>
+                    <div class="text">
+                        <h6 class="mb-1 card-title">Total Revenue</h6>
+                        <span>₹<%=revenue%></span>
+                        <span class="text-sm">
+                            for the delivered orders
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-success-light"><i class="text-success material-icons md-person"></i></span>
+                    <div class="text">
+                        <h6 class="mb-1 card-title">Users</h6> <span><%=userCount%></span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-warning material-icons md-qr_code"></i></span>
+                    <div class="text">
+                        <h6 class="mb-1 card-title">Products</h6> <span><%=prodCount%></span>
+                        <span class="text-sm">
+                            In <%=catCount%> Categories
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card card-body mb-4">
+                <article class="icontext">
+                    <span class="icon icon-sm rounded-circle bg-info-light"><i class="text-info material-icons md-local_shipping"></i></span>
+                    <div class="text">
+                        <h6 class="mb-1 card-title">Earning for <%= new Date().toLocaleString('default', { month: 'long' }) %></h6> <span>₹<%=monthlyRev%></span>
+                        <span class="text-sm">
+                            Based in your local time.
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <input type="hidden" id="orderData" value='<%= JSON.stringify(graph1) %>'>
+        <article class="card-body">
+            <h5 class="card-title">Sale statistics</h5>
+            <canvas id="myChart" height="120px"></canvas>
+        </article>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <input type="hidden" id="categoryData" value='<%= JSON.stringify(catGraph) %>'>
+          <div class="card mb-4">
+            <article class="card-body">
+              <h5 class="card-title">Store</h5>
+              <canvas id="myChart2" height="300"></canvas>
+            </article>
+          </div>
+        </div>
+        <div class="col-sm-6">
+            <input type="hidden" id="paymentModeData" value='<%= JSON.stringify(paymentModeChart) %>'>
+          <div class="card mb-4">
+            <article class="card-body" >
+              <h5 class="card-title">Payment Modes Used</h5>
+              <canvas id="myChart3" height="217"></canvas>
+            </article>
+          </div>
+        </div>
+    </div>      
+</section> <!-- content-main end// -->
+<%- include('../partials/admin/footer');-%>

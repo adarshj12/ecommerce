@@ -1,0 +1,169 @@
+<%- include('../partials/user/header');-%>
+    <section>
+        <div class="slider-area">
+            <div class="slider-active swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="intro-section slider-height-1 slider-content-center bg-img single-animation-wrap slider-bg-color-1"
+                            style="background-image:url(<%=banner.photo.image_url%>)">
+                            <div class="container">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="slider-content-1 slider-animated-1">
+                                            <h3 class="animated">new arrival</h3>
+                                            <h1 class="animated"><%=banner.text.split(" ")[0]%> <br><%=banner.text.split(" ")[1]%></h1>
+                                            <div class="slider-btn btn-hover">
+                                                <a href="/product?id=<%=banner.product%>" class="btn animated">
+                                                    Shop Now <i class=" ti-arrow-right "></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="mt-5" style="justify-content: center;display: flex;">Categories</h2>
+        <div class="banner-area pt-100 pb-70">
+            <div class="container">
+                <div class="row">
+                    <% categories.forEach(item=> { %>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="banner-wrap mb-30" data-aos="fade-up" data-aos-delay="200">
+                                <a href="/products?id=<%= item._id %>&page=1"><img style="width: 450px;height: 300px;" src="<%= item.image %>" alt=""></a>
+                                <div class="banner-content-1">
+                                    <h3 style="color: white;">
+                                        <%= item.name %>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+
+                </div>
+            </div>
+        </div>
+        <%if(deals.length>0){%>
+        <div class="product-area pb-95">
+            <div class="container">
+                <div class="section-border section-border-margin-1" data-aos="fade-up" data-aos-delay="200">
+                    <div class="section-title-timer-wrap bg-white">
+                        <div class="section-title-1">
+                            <h2>Deal Of The Day</h2>
+                        </div>
+                        <div id="timer-1-active" class="timer-style-1">
+                            <span>Ends In: </span>
+                            <div id="countdown-timer" data-countdown="<%= deals[0].expiry.toISOString() %>"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-slider-active-1 swiper-container">
+                    <div class="swiper-wrapper">
+                        <%deals.forEach((elem,index)=>{%>
+                        <div class="swiper-slide">
+                            <div class="product-wrap" data-aos="fade-up" data-aos-delay="200">
+                                <div class="product-img img-zoom mb-25">
+                                    <a href="/product?id=<%=elem._id%>">
+                                        <img style="width: 300px;height: 250px;" src="<%=elem.photos[0].image_url%>" alt="">
+                                    </a>
+                                    <div class="product-badge badge-top badge-right badge-pink">
+                                        <span>-<%=elem.discount%>%</span>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <h3><a href="/product?id=<%=elem._id%>"><%=elem.name%></a></h3>
+                                    <div class="product-price">
+                                        <span class="old-price">₹<%=Math.ceil(elem.price*(1/(1-(elem.discount)/100)))%></span>
+                                        <span class="new-price">₹<%=elem.price%> </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%})%>
+                    </div>
+                    <div class="product-prev-1 product-nav-1" data-aos="fade-up" data-aos-delay="200"><i
+                            class="fa fa-angle-left"></i></div>
+                    <div class="product-next-1 product-nav-1" data-aos="fade-up" data-aos-delay="200"><i
+                            class="fa fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <%}%>
+      
+        <div class="service-area pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30">
+                        <div class="service-wrap" data-aos="fade-up" data-aos-delay="200">
+                            <div class="service-img">
+                                <img src="user-styles/images/icon-img/car.png" alt="">
+                            </div>
+                            <div class="service-content">
+                                <h3>Free Shipping</h3>
+                                <p>Free shipping on all order</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30">
+                        <div class="service-wrap" data-aos="fade-up" data-aos-delay="400">
+                            <div class="service-img">
+                                <img src="user-styles/images/icon-img/time.png" alt="">
+                            </div>
+                            <div class="service-content">
+                                <h3>Support 24/7</h3>
+                                <p>Support 24 hours a day</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30">
+                        <div class="service-wrap" data-aos="fade-up" data-aos-delay="600">
+                            <div class="service-img">
+                                <img src="user-styles/images/icon-img/dollar.png" alt="">
+                            </div>
+                            <div class="service-content">
+                                <h3>Money Return</h3>
+                                <p>Back Guarantee Under </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-30">
+                        <div class="service-wrap" data-aos="fade-up" data-aos-delay="800">
+                            <div class="service-img">
+                                <img src="user-styles/images/icon-img/discount.png" alt="">
+                            </div>
+                            <div class="service-content">
+                                <h3>Order Discount</h3>
+                                <p>Onevery order over ₹1150</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../partials/user/footer');-%>
+
+    <script>
+        var countdownElement = document.getElementById('countdown-timer');
+        var countdownDate = new Date(countdownElement.getAttribute('data-countdown')).getTime();
+      
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countdownDate - now;
+    
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+            countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    
+            // if (distance < 0) {
+            //     clearInterval(x);
+            //     countdownElement.innerHTML = "Expired";
+            // }
+        }, 1000);
+    </script>

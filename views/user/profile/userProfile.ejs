@@ -1,0 +1,58 @@
+<%- include('../../partials/user/header');-%>
+    <section>
+        <div class="card">
+            <div class="card-body">
+                <div class="row gx-5">
+                    <aside class="col-lg-3 border-end">
+                        <nav class="nav nav-pills flex-lg-column mb-4">
+                            <a class="nav-link " aria-current="" href="account">Dashboard</a>
+                            <a class="nav-link " href="orders">My Orders</a>
+                            <a class="nav-link active" href="address">Address</a>
+                        </nav>
+                    </aside>
+                    <div class="col-lg-9">
+                        <section class="content-body p-xl-4">
+
+                            <div class="different-address  mt-30px">
+
+                                <h4 class="mb-3">Edit Profile</h4>
+
+                            </div>
+                            <form onsubmit="editProfile(event)">
+                                <input type="text" name="userId" id="" value="<%=user._id%>" hidden>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName">Name</label>
+                                        <input type="text" value="<%=user.name%>" class="form-control" id="username"
+                                            name="username">
+                                        <span id="name-error" style="color: red;"></span>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="mobilenumber">Mobile Number</label>
+                                        <input type="text" value="<%=user.mobile%>" class="form-control" id="usermobile"
+                                            name="usermobile">
+                                        <span id="mobile-error" style="color: red;"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email">Email</label>
+                                    <input type="email" value="<%=user.email%>" class="form-control" id="useremail"
+                                        name="useremail">
+                                    <span id="email-error" style="color: red;"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email">Password</label>
+                                    <input type="password" value="<%=user.password%>" class="form-control"
+                                        id="userpassword" name="userpassword">
+                                    <span id="password-error" style="color: red;"></span>
+                                </div>
+                                <br>
+                                <button class="btn btn-primary btn-sm" type="submit">Edit</button>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('../../partials/user/footer');-%>

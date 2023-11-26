@@ -1,0 +1,80 @@
+<%- include('../partials/admin/header');-%>
+    <section class="content-main">
+        <ul class="nav nav-pills " id="pills-tab" role="tablist" style="margin-left: 10px;">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">View Coupons</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                    type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Add Coupon</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                <table id="" class="table ">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sl.No</th>
+                            <th scope="col">Coupon Name</th>
+                            <th scope="col">Discount Amount</th>
+                            <th scope="col">Minimum Bound</th>
+                            <th scope="col">Expiry Date</th>
+                            <th scope="col">Remove Coupon</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%coupons.forEach((elem,index)=>{%>
+                        <tr>
+                            <td><%=index+1%></td>
+                            <td><%=elem.name%></td>
+                            <td><%=elem.discount%>₹</td>
+                            <td><%=elem.minBound%>₹</td>
+                            <td><%=new Date(elem.expiry).toDateString().slice(4,15)%></td>
+                            <td>
+                                <a href="/admin/removeCoupon?id=<%=elem._id%>" class="btn btn-danger">REMOVE</a>
+                            </td>
+                        </tr>
+                        <%})%>
+                   
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                <div class="registration-form">
+                    <form action="/admin/coupons" method="post">
+                        <div class="form-group">
+                            <label for="">Coupon Name </label>
+                            <input type="percentage" class="form-control item" name="name"
+                                placeholder="Coupon Name ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Expiry Date</label>
+                            <input type="date" class="form-control item" name="expiry"
+                                placeholder="Coupon Expiry Date">
+                        </div>
+                        <div class="form-group">
+                            <label for=""> Discount </label>
+                            <input type="percentage" class="form-control item" name="discount"
+                                placeholder="₹">
+                        </div>
+                        <div class="form-group">
+                            <label for=""> Minimum Limit Amount </label>
+                            <input type="percentage" class="form-control item" name="minBound"
+                                placeholder="₹">
+                        </div>
+                        <div class="form-group text-center ">
+                            <button type="submit" class="btn btn-block  create-account">SAVE</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        
+    </section>
+    <%- include('../partials/admin/footer');-%>

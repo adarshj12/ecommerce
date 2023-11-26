@@ -1,0 +1,101 @@
+<%- include('../partials/admin/header');-%>
+<div class="overlay" id="overlay" style="display: none;"></div>
+<div class="spinner-container" id="loading" style="display: none;">
+ 
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+
+</div>
+    <section class="content-main">
+        <form onsubmit="updateProduct(event)">
+            <div class="row">
+                <div class="content-header">
+                    <h4 class="content-title">Edit <%=product.name%>
+                    </h4>
+                    <input type="text" name="_id" id="_id" value="<%=product._id%>" hidden>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Basic</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="product_name" class="form-label">Product title</label>
+                            <input type="text" value="<%=product.name%>" placeholder="Type here" name="name"
+                                class="form-control" id="product_name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Full description</label>
+                            <input placeholder="Type here" value="<%=product.description%>" name="description"
+                                class="form-control" rows="4">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="mb-4">
+                                    <label class="form-label">price</label>
+                                    <div class="row gx-2">
+                                        <input placeholder="₹" value="<%=product.price%>" name="price" type="number"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" name="category">
+                                    <% categories.forEach(category=> { %>
+                                        <% if (category===product.category) { %>
+                                            <option value="<%= category %>" selected>
+                                                <%= category %>
+                                            </option>
+                                            <% } else { %>
+                                                <option value="<%= category %>">
+                                                    <%= category %>
+                                                </option>
+                                                <% } %>
+                                                    <% }) %>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Inventory</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-4">
+                                    <label for="product_name" class="form-label">Stock</label>
+                                    <input type="number" value="<%=product.stock%>" name="stock" placeholder="inch"
+                                        class="form-control" id="product_name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <% product.photos.forEach((elem, index)=> { %>
+                        <div class="col-lg-3">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="input-upload">
+                                        <img style="height: 80px;width: 80px;" id="edit-<%=elem._id%>"
+                                            src="<%= elem.image_url %>" alt="">
+                                        <input class="form-control" multiple name="image"
+                                            onchange="editImag(event,'<%=elem._id%>')" type="file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Edit</button>
+        </form>
+    </section>
+    <%- include('../partials/admin/footer');-%>
